@@ -26,4 +26,11 @@ public class Heroe extends Characters
         Pocion = pocion;
     }
     
+    public void MostrarStats()
+    {
+        System.out.println("\nEl nombe de tu heroe es: "+getNombre()+
+                "\nNivel actual: "+getNivel() +" con "+getPts()+" de 100 puntos maximos"+"\nCantidad de vida: "+getHP()+"\nDaño por ataque es de 10 a 20"+
+                "\nCantidad de pociones disponibles: "+getPocion());
+    }
+    
 }

@@ -1,7 +1,8 @@
 //El despertar del heroe 
 
+import java.util.Random;
 import java.util.Scanner;
-import java.util.stream.Gatherer.Integrator.Greedy;
+
 
 public class Despertar_heroe 
 {
@@ -75,24 +76,18 @@ public class Despertar_heroe
 
     }
 
-    public static boolean intLimit(int opcion)//comprobar si el numero es 1-4 parte1
-    {
-        return opcion >=1 && opcion<=4;
-        
-    }
-
-    public static int intLimitCheck(Scanner sc) //comprobar si el numero es 1-4 parte2
+    public static int intLimitCheck(Scanner sc) //comprobar si el numero es 1-4 
     {
         int opcion;
         do
         {
             opcion = MenuCheck(sc);
-            if(!intLimit(opcion))
+            if(!(opcion >=1 && opcion<=4))
             {
                 System.out.println(RED+"\nError: Tienes que introducir un numero 1-4\n"+RESET);
                 Menu();
             }
-        }while(!intLimit(opcion));
+        }while(!(opcion >=1 && opcion<=4));
         return opcion;  
     }
 
@@ -115,6 +110,7 @@ public class Despertar_heroe
             System.out.print(GREEN + "." + RESET);
         }
         System.out.println(GREEN+"\nPartida creada"+RESET);
+        
     }
 
     public static void ConsultarRanking()//opcion consultar ranking del menu
@@ -157,6 +153,20 @@ public class Despertar_heroe
                 }
         }
     }
+    public static int DamageHeroe()
+    {
+        Random random = new Random();
+        int damageHeroe = random.nextInt(10,21);
+        return damageHeroe;
+    }
+
+    public static int DamageVillano()
+    {
+        Random random = new Random();
+        int damageVillano = random.nextInt(5,15);
+        return damageVillano;
+    }
+
     public static void main(String[] args) 
     {
         Scanner sc = new Scanner(System.in);
@@ -165,6 +175,10 @@ public class Despertar_heroe
         int opcion = intLimitCheck(sc);
         OpcionMenu(opcion);
         
+        Heroe heroe1 = new Heroe("Alli", 100,1,0,0,3);
+        Villano vilain1 = new Villano("Mago ",40 , 1, 40);
+        heroe1.MostrarStats();
+        vilain1.MostrarStats();
         
     }
 }

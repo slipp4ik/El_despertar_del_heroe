@@ -37,4 +37,12 @@ public class Characters
         Nivel = nivel;
     }
 
+    public int getDamage() {
+        return Damage;
+    }
+
+    public void setDamage(int damage) {
+        Damage = damage;
+    }
+
 }
