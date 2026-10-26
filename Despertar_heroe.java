@@ -3,4 +3,8 @@
 public class Despertar_heroe 
 {
     
+    public static void main(String[] args) 
+    {
+        
+    }
 }
