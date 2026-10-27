@@ -99,24 +99,17 @@ public class Despertar_heroe
 
     public static void NuevaPartida()//opcion nueva partida del menu
     {
-        System.out.println("Creando nueva partida");
-        for (int i = 0; i < 10; i++) 
+        System.out.println("\nCreando nueva partida\n");
+        for (int i = 0; i < 14; i++) 
         {
             TimeOut(80);
-            System.out.print(RED + "." + RESET);
+            System.out.print(RED + "|" + RESET);
         }
         for (int i = 0; i < 15; i++) 
         {
             TimeOut(90);
-            System.out.print(ORANGE + "." + RESET);
-        }
-        for (int i = 0; i < 20; i++) 
-        {
-            TimeOut(100);
-            System.out.print(GREEN + "." + RESET);
-        }
-        System.out.println(GREEN+"\nPartida creada"+RESET);
-        
+            System.out.print(ORANGE + "|" + RESET);
+        }  
     }
 
     public static void ConsultarRanking()//opcion consultar ranking del menu
@@ -160,6 +153,24 @@ public class Despertar_heroe
                 }
         }
     }
+    public static String CrearHeroe()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nIntroduce el nombre de tu heroe");
+        String HeroeNom = sc.next();
+        for (int i = 0; i < 10; i++) 
+        {
+            TimeOut(90);
+            System.out.print(ORANGE + "|" + RESET);
+        }
+        for (int i = 0; i < 20; i++) 
+        {
+            TimeOut(100);
+            System.out.print(GREEN + "|" + RESET);
+        }
+        System.out.println(GREEN+"\nHeroe creado"+RESET);
+        return HeroeNom;
+    }
     public static int DamageHeroe()
     {
         Random random = new Random();
@@ -182,11 +193,13 @@ public class Despertar_heroe
         int opcion = intLimitCheck(sc);
         OpcionMenu(opcion);
         
+        String HeroeNom = CrearHeroe();
+        Heroe heroe1 = new Heroe("", 100,1,0,0,3);
+        heroe1.setNombre(HeroeNom);
         
-        Heroe heroe1 = new Heroe("Alli", 100,1,0,0,3);
         Villano villano1 = new Villano("Mago ",40 , 1, 40);
         heroe1.MostrarStats();
-        villano1.MostrarStats();
+        //villano1.MostrarStats();
         
     }
 }
