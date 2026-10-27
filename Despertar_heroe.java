@@ -30,11 +30,17 @@ public class Despertar_heroe
         System.out.println("_____________________________________");
     }
 
-    public static void Intro()//introduccion 
+    public static String Intro()//introduccion + hay que guardar el usuario 
     {
+        Scanner sc = new Scanner(System.in);
         Filler();
+        System.out.println("Bienvenido a El despertar del heroe");
         TimeOut(500);
-        System.out.println("Bienvenido a El despertar del heroe\n");
+        System.out.println("\nIntroduce tu usuario para guardar las partidas:\n");
+        String usuario = sc.next();
+        Filler();
+        System.out.println(GREEN+"\nEl usuario "+usuario+" guardado correctamente\n"+RESET);
+        return usuario;
     }
 
     public static void Menu() //un menu-> nueva partida, consultar ranking, ayuda, salir
@@ -126,6 +132,7 @@ public class Despertar_heroe
     public static void Salir()//opcion salir del menu
     {
         System.out.println("Hasta luego...");
+        System.exit(0);
     }
     public static void OpcionMenu(int opcion)//1.nueva partida, 2.consultar ranking, 3.ayuda, 4.salir
     {
@@ -170,15 +177,16 @@ public class Despertar_heroe
     public static void main(String[] args) 
     {
         Scanner sc = new Scanner(System.in);
-        Intro();
+        String user = Intro();
         Menu();
         int opcion = intLimitCheck(sc);
         OpcionMenu(opcion);
         
+        
         Heroe heroe1 = new Heroe("Alli", 100,1,0,0,3);
-        Villano vilain1 = new Villano("Mago ",40 , 1, 40);
+        Villano villano1 = new Villano("Mago ",40 , 1, 40);
         heroe1.MostrarStats();
-        vilain1.MostrarStats();
+        villano1.MostrarStats();
         
     }
 }
