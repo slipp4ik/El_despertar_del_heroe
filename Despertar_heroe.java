@@ -185,7 +185,7 @@ public class Despertar_heroe
         return damageVillano;
     }
     
-    public static void battaleIntro(Heroe heroe1)
+    public static void HistoriaIntro(Heroe heroe1)
     {
         System.out.println("Mientras caminaba por un bosque envuelto en niebla, el joven "+heroe1.getNombre()+ " descubrió una pequeña cabaña "
         +"iluminada por una luz extraña, donde un anciano mago lo esperaba como si hubiera estado aguardando su llegada durante siglos." 
@@ -195,12 +195,18 @@ public class Despertar_heroe
     }
     public static void primerVillanoIntro(Heroe heroe1)
     {
-        System.out.println("Al cruzar un puente de piedra derruido, "+heroe1.getNombre()+" oyó un arrastrar de cadenas que resonaba entre la niebla." 
-        +"Grimdal el Encadenado emergió de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: Nadie cruza estas tierras sin pasar sobre mi cadáver.");
+       System.out.println("Al cruzar un puente de piedra derruido, " + heroe1.getNombre() + " oye un arrastrar de cadenas que resuena entre la niebla. "
+        + "Grimdal el Encadenado emerge de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: \"Nadie cruza estas tierras sin pasar sobre mi cadáver\".");
     }
-    public static void primerBattala()
+    public static void menuDuranteBatalla()
     {
-
+        System.out.println("1. Atacar\n"+"2. Usar un poción\n"+"3. Inventario\n"+"4. Abandonar\n");
+    }
+    public static void primerBattala(Heroe heroe, Villano primerVillano)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("La batalla c");  
     }
 
     public static void main(String[] args) 
@@ -212,8 +218,8 @@ public class Despertar_heroe
         OpcionMenu(opcion);
         
         String HeroeNom = CrearHeroe();
-        Heroe heroe1 = new Heroe("", 100,1,0,0,3);
-        heroe1.setNombre(HeroeNom);
+        Heroe heroe = new Heroe("", 100,1,0,0,3);
+        heroe.setNombre(HeroeNom);
         
         Villano primerVillano = new Villano("Grimdal el Encadenado", 40, 1,0 );
         Villano segundoVillano = new Villano("Vessa la Susurrante", 60, 2, 0);
