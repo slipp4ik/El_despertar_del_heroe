@@ -32,5 +32,4 @@ public class Heroe extends Characters
                 "\nNivel actual: "+getNivel() +" con "+getPts()+" de 100 puntos maximos"+"\nCantidad de vida: "+getHP()+"\nDaño por ataque es de 10 a 20"+
                 "\nCantidad de pociones disponibles: "+getPocion());
     }
-    
 }

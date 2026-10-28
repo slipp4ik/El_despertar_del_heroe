@@ -174,7 +174,7 @@ public class Despertar_heroe
     public static int DamageHeroe()
     {
         Random random = new Random();
-        int damageHeroe = random.nextInt(10,21);
+        int damageHeroe = random.nextInt(10,20);
         return damageHeroe;
     }
 
@@ -200,13 +200,120 @@ public class Despertar_heroe
     }
     public static void menuDuranteBatalla()
     {
-        System.out.println("1. Atacar\n"+"2. Usar un poción\n"+"3. Inventario\n"+"4. Abandonar\n");
+        System.out.println("1. Atacar o defender\n"+"2. Usar un poción\n"+"3. Inventario\n"+"4. Abandonar\n");
+    }
+    
+    public static void heroeAtacar(Heroe heroe, Villano primerVillano)
+    {    
+        if(heroe.serVivo() && primerVillano.serVivo());
+        {
+            heroe.setDamage(DamageHeroe());
+            
+            System.out.println("Atacando...");
+            primerVillano.serAtacado(heroe.getDamage());
+            
+            System.out.println("heroe attac damage: "+heroe.getDamage());
+            System.out.println("Ataca hecha, el villano tiene "+primerVillano.getHP()+" vida.");
+        }
+        if(heroe.serVivo() && !primerVillano.serVivo())
+        {
+            System.out.println(heroe.getNombre()+" gano la batalla");
+        }
+        if(!heroe.serVivo() && primerVillano.serVivo())
+        {
+            System.out.println(heroe.getNombre()+" perdio la batalla");
+        }
+
+    }
+
+    public static void PrimerVillanoAtacar(Heroe heroe, Villano primerVillano)
+    {
+        if(heroe.serVivo() && primerVillano.serVivo());
+        {
+            primerVillano.setDamage(DamageVillano());
+            
+            System.out.println("Villano atacando...");
+            heroe.serAtacado(primerVillano.getDamage());
+            
+            System.out.println("villano attac damage: "+primerVillano.getDamage());
+            System.out.println("Ataca hecha,"+heroe.getNombre()+" tiene "+heroe.getHP()+" vida.");
+        }
+        if(heroe.serVivo() && !primerVillano.serVivo())
+        {
+            System.out.println(heroe.getNombre()+" gano la batalla");
+        }
+        if(!heroe.serVivo() && primerVillano.serVivo())
+        {
+            System.out.println(heroe.getNombre()+" perdio la batalla");
+        }
+    }
+
+      
+
+    public static void primerBattalaMenu(Heroe heroe, Villano primerVillano )
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("La batalla contra "+primerVillano.getNombre()+" comienza");
+        System.out.println("1. Atacar\n"+"2. Abondonar\n");
+        int opMenuBatalla = intLimit2(sc);
+
+        switch(opMenuBatalla)
+        {
+            case 1:
+                primerBattala(heroe, primerVillano);
+                break;
+
+            case 2:
+                Menu();
+                return;
+        }
+    }
+     public static int intLimit2(Scanner sc) //comprobar si el numero es 1-2
+    {
+        int opcion;
+        do
+        {
+            opcion = MenuCheck(sc);
+            if(!(opcion >=1 && opcion<=2))
+            {
+                System.out.println(RED+"\nError: Tienes que introducir un numero 1-2\n"+RESET);
+            }
+        }while(!(opcion >=1 && opcion<=2));
+        return opcion;  
+    }
+    public static void atacarOdefender(int menuu, Heroe heroe, Villano )
+    {
+        switch(menuu)
+        {
+            case 1: heroeAtacar(heroe, primerVillano);
+            case 2 :PrimerVillanoAtacar(heroe, primerVillano);
+        }
+
     }
     public static void primerBattala(Heroe heroe, Villano primerVillano)
     {
         Scanner sc = new Scanner(System.in);
-        
-        System.out.println("La batalla c");  
+        boolean jugar = true;
+        while(jugar)
+        {
+            if(heroe.serVivo() && primerVillano.serVivo())
+            {
+                
+                menuDuranteBatalla();
+                int menuu = intLimitCheck(sc);
+                switch(menuu)
+                {
+                    case 1: 
+                }
+                heroeAtacar(heroe, primerVillano);
+                PrimerVillanoAtacar(heroe, primerVillano);
+            }
+            else
+            {
+                jugar = false;
+            }
+        }
     }
 
     public static void main(String[] args) 
@@ -223,9 +330,9 @@ public class Despertar_heroe
         
         Villano primerVillano = new Villano("Grimdal el Encadenado", 40, 1,0 );
         Villano segundoVillano = new Villano("Vessa la Susurrante", 60, 2, 0);
-        Villano finalBoss = new Villano("Señor de las Sombras ",80 , 3, 0);
+        Villano finalVillano = new Villano("Señor de las Sombras ",80 , 3, 0);
         
-        
-        
+        primerBattala(heroe,primerVillano);
+
     }
 }

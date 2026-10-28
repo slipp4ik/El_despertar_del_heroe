@@ -45,7 +45,7 @@ public class Characters
         Damage = damage;
     }
 
-    public void serAtacado()
+    public void serAtacado(int Damage)
     {
         HP -= Damage;
         if(HP < 0)
@@ -58,5 +58,5 @@ public class Characters
     {
         return HP > 0;
     }
-        
+
 }
