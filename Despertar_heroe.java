@@ -186,7 +186,7 @@ public class Despertar_heroe
     }
 
     //Abajo viene la historia/contexto del juego
-    public static void HistoriaIntro(Heroe heroe)
+    public static void HistoriaIntro(Heroe heroe) // la prehistoria 
     {
         System.out.println(
         "Mientras caminaba por un bosque envuelto en niebla, el joven "+heroe.getNombre()+ " descubrió una pequeña cabaña\n"
@@ -195,10 +195,17 @@ public class Despertar_heroe
         System.out.println(heroe.getNombre()+ " aceptó la espada y salió de la cabaña rumbo a las montañas del norte, donde se alzaba la fortaleza del villano.\n"+ 
         "Pero el camino no sería fácil: antes tendría que cruzar tierras malditas y enfrentarse a los siervos que guardaban \ncada paso hacia su destino.");
     }
-    public static void villanoIntro(Heroe heroe)
+    public static void villanoIntro(Heroe heroe) // intro del primer villano
     {
        System.out.println("Al cruzar un puente de piedra derruido, " + heroe.getNombre() + " oye un arrastrar de cadenas \nque resuena entre la niebla. "
         + " Grimdal el Encadenado emerge de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: \nNadie cruza estas tierras sin pasar sobre mi cadáver.");
+    }
+    public static void finalPrimeraBatalla() // al ganar la primera batalla
+    {
+        System.out.println("Grimdal cae de rodillas y sus cadenas se deshacen en polvo. El héroe recoge de su \narmadura un colgante con un símbolo oscuro y sigue su camino."
+            +"El sendero se adentra en un pantano cubierto de niebla, donde los árboles retorcidos parecen observarlo en silencio. \nEntre las ramas, el héroe cruza ruinas olvidadas y escucha los primeros susurros que llaman a su nombre."
+            +"Al llegar a un claro iluminado por una luna pálida, Vessa la Susurrante aparece flotando entre las sombras:\n Has llegado muy lejos, pero mis voces te harán dudar de todo.");
+        
     }
     //-------------------------------------------------
     
@@ -207,22 +214,10 @@ public class Despertar_heroe
         if(heroe.serVivo() && villano.serVivo());
         {
             heroe.setDamage(DamageHeroe());
-            
             System.out.println("Atacando...");
             villano.serAtacado(heroe.getDamage());
-            
-            System.out.println("heroe attac damage: "+heroe.getDamage());
-            System.out.println("Ataca hecha, el villano tiene "+villano.getHP()+" vida.\n");
+            System.out.println("Ataque realizada, el villano tiene "+villano.getHP()+" de vida.\n");
         }
-        if(heroe.serVivo() && !villano.serVivo())
-        {
-            System.out.println(heroe.getNombre()+" gano la batalla");
-        }
-        if(!heroe.serVivo() && villano.serVivo())
-        {
-            System.out.println(heroe.getNombre()+" perdio la batalla");
-        }
-
     }
 
     public static void VillanoAtacar(Heroe heroe, Villano villano) // metodo que realiza el ataque del villano
@@ -233,17 +228,7 @@ public class Despertar_heroe
             
             System.out.println("Villano atacando...");
             heroe.serAtacado(villano.getDamage());
-            
-            System.out.println(villano.getNombre()+"villano attac damage: "+villano.getDamage());
-            System.out.println("Ataca hecha,"+heroe.getNombre()+" tiene "+heroe.getHP()+" vida.");
-        }
-        if(heroe.serVivo() && !villano.serVivo())
-        {
-            System.out.println(heroe.getNombre()+" gano la batalla");
-        }
-        if(!heroe.serVivo() && villano.serVivo())
-        {
-            System.out.println(heroe.getNombre()+" perdio la batalla");
+            System.out.println("Ataque realizada, tienes "+heroe.getHP()+" de vida.");
         }
     }
 
@@ -267,17 +252,44 @@ public class Despertar_heroe
         System.out.println("1. Atacar \n"+"2. Defender \n"+"3. Usar un poción\n"+"4. Inventario\n"+"5. Abandonar\n");
     }
 
-    public static boolean defender() // posibilidad 50/50 de defender el ataque del villano
+    public static boolean defender(Villano villano) // posibilidad 50/50 de defender el ataque del villano
     {
         Random random = new Random();
-        int defend = random.nextInt(0,2);
-        if(defend == 0)
+        int nivelVillano = villano.getNivel();
+        switch(nivelVillano)
         {
+        case 1: 
+            int defend1 = random.nextInt(0,2);
+            if(defend1 == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        case 2:
+            int defend2 = random.nextInt(0,3);
+            if(defend2 == 0 || defend2 == 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        case 3:
+            int defend3 = random.nextInt(0,4);
+            if(defend3 == 0 || defend3 == 1 || defend3 == 2)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        default:
             return false;
-        }
-        else
-        {
-            return true;
         }
         
     }
@@ -315,8 +327,7 @@ public class Despertar_heroe
                 {
                     turnoDef = false;
                     turnoAt = true;
-                    System.out.println(RED+"PROBAR defender()"+defender()+RESET);
-                    if(defender() == true)
+                    if(defender(villano) == true)
                     {
                     System.out.println("Ataque de "+villano.getNombre()+" fue defendida");
                     }
@@ -327,8 +338,7 @@ public class Despertar_heroe
                 }
                 else
                 {
-                    System.out.println("No puedes defender aun");
-                    
+                    System.out.println("No puedes defender aun");  
                 }
                 break;
             case 3: System.out.println("en proceso"); break;
@@ -339,9 +349,7 @@ public class Despertar_heroe
             break;
             }
             
-        }while(heroe.serVivo() && villano.serVivo());
-        System.out.println("Enhorabuena, has ganado a "+villano.getNombre()+", pero tu camino no termina aqui.");
-        
+        }while(heroe.serVivo() && villano.serVivo());    
     }
 
     // Creacion de tres villanos
@@ -386,7 +394,10 @@ public class Despertar_heroe
         HistoriaIntro(heroe);
         villanoIntro(heroe);
         Batalla(heroe, villano);
-        
+        finalPrimeraBatalla();
+        segundoVillano(villano);
+        Batalla(heroe, villano);
+
         
 
     }
