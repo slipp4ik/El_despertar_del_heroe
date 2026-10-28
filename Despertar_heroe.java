@@ -153,7 +153,7 @@ public class Despertar_heroe
                 }
         }
     }
-    public static String CrearHeroe()
+    public static String CrearHeroe() // nombrar el heroe como el jugador quiere
     {
         Scanner sc = new Scanner(System.in);
         System.out.println("\nIntroduce el nombre de tu heroe\n");
@@ -171,20 +171,21 @@ public class Despertar_heroe
         System.out.println(GREEN+"\nHeroe creado"+RESET);
         return HeroeNom;
     }
-    public static int DamageHeroe()
+    public static int DamageHeroe() // crear el daño para el heroe, usando random
     {
         Random random = new Random();
         int damageHeroe = random.nextInt(10,20);
         return damageHeroe;
     }
 
-    public static int DamageVillano()
+    public static int DamageVillano() // crear el daño para el villano, usando random
     {
         Random random = new Random();
         int damageVillano = random.nextInt(5,15);
         return damageVillano;
     }
-    
+
+    //Abajo viene la historia/contexto del juego
     public static void HistoriaIntro(Heroe heroe)
     {
         System.out.println(
@@ -199,9 +200,9 @@ public class Despertar_heroe
        System.out.println("Al cruzar un puente de piedra derruido, " + heroe.getNombre() + " oye un arrastrar de cadenas \nque resuena entre la niebla. "
         + " Grimdal el Encadenado emerge de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: \nNadie cruza estas tierras sin pasar sobre mi cadáver.");
     }
+    //-------------------------------------------------
     
-    
-    public static void heroeAtacar(Heroe heroe, Villano villano)
+    public static void heroeAtacar(Heroe heroe, Villano villano) // metodo que realiza el ataque del heroe
     {    
         if(heroe.serVivo() && villano.serVivo());
         {
@@ -224,7 +225,7 @@ public class Despertar_heroe
 
     }
 
-    public static void VillanoAtacar(Heroe heroe, Villano villano)
+    public static void VillanoAtacar(Heroe heroe, Villano villano) // metodo que realiza el ataque del villano
     {
         if(heroe.serVivo() && villano.serVivo());
         {
@@ -246,28 +247,7 @@ public class Despertar_heroe
         }
     }
 
-      
-
-    public static void primerBattalaMenu(Heroe heroe, Villano villano )
-    {
-        Scanner sc = new Scanner(System.in);
-        
-        System.out.println("La batalla contra "+villano.getNombre()+" comienza");
-        System.out.println("1. Atacar\n"+"2. Abondonar\n");
-        int opMenuBatalla = intLimit2(sc);
-
-        switch(opMenuBatalla)
-        {
-            case 1:
-                primerBattala(heroe, villano);
-                break;
-
-            case 2:
-                Menu();
-                return;
-        }
-    }
-     public static int intLimit2(Scanner sc) //comprobar si el numero es 1-2
+    public static int intLimit2(Scanner sc) //comprobar si el numero es 1-2
     {
         int opcion;
         do
@@ -281,24 +261,16 @@ public class Despertar_heroe
         return opcion;  
     }
 
-    public static void atacarOdefender(int menuBatalla, Heroe heroe, Villano villano )
-    {
-        switch(menuBatalla)
-        {
-            case 1: heroeAtacar(heroe, villano);
-            case 2 :VillanoAtacar(heroe, villano);
-        }
-
-    }
-    public static void menuDuranteBatalla()
+   
+    public static void menuDuranteBatalla() // un menu que esta utilizado dentro de la batalla
     {
         System.out.println("1. Atacar \n"+"2. Defender \n"+"3. Usar un poción\n"+"4. Inventario\n"+"5. Abandonar\n");
     }
 
-    public static boolean defender()
+    public static boolean defender() // posibilidad 50/50 de defender el ataque del villano
     {
         Random random = new Random();
-        int defend = random.nextInt(0,1);
+        int defend = random.nextInt(0,2);
         if(defend == 0)
         {
             return false;
@@ -310,7 +282,7 @@ public class Despertar_heroe
         
     }
 
-    public static void primerBattala(Heroe heroe, Villano villano)
+    public static void Batalla(Heroe heroe, Villano villano) // el metodo de batalla principal
     {
         Scanner sc = new Scanner(System.in);
         boolean turnoAt;
@@ -343,6 +315,7 @@ public class Despertar_heroe
                 {
                     turnoDef = false;
                     turnoAt = true;
+                    System.out.println(RED+"PROBAR defender()"+defender()+RESET);
                     if(defender() == true)
                     {
                     System.out.println("Ataque de "+villano.getNombre()+" fue defendida");
@@ -354,13 +327,13 @@ public class Despertar_heroe
                 }
                 else
                 {
-                    System.out.println("No puedes defender dos veces seguidas");
+                    System.out.println("No puedes defender aun");
                     
                 }
                 break;
-            case 3: System.out.println("en proceso");
-            case 4: System.out.println("en proceso");
-            case 5: System.out.println("en proceso");
+            case 3: System.out.println("en proceso"); break;
+            case 4: System.out.println("en proceso"); break;
+            case 5: System.out.println("en proceso"); break;
             default: 
             System.out.println("Opción no válida");
             break;
@@ -371,6 +344,7 @@ public class Despertar_heroe
         
     }
 
+    // Creacion de tres villanos
     public static void primerVillano(Villano villano)
     {
         villano.setNombre("Grimdal el Encadenado");
@@ -391,7 +365,7 @@ public class Despertar_heroe
         villano.setHP(80);
         villano.setNivel(3);  
     }
-
+ //-----------------------------------
 
 
 
@@ -406,13 +380,12 @@ public class Despertar_heroe
         
         String HeroeNom = CrearHeroe();
         Heroe heroe = new Heroe(HeroeNom, 100,1,0,0,3);
-       
-
         Villano villano = new Villano("", 0, 0,0 );
+
         primerVillano(villano);
         HistoriaIntro(heroe);
         villanoIntro(heroe);
-        primerBattala(heroe, villano);
+        Batalla(heroe, villano);
         
         
 
