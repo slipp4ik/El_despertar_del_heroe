@@ -156,7 +156,7 @@ public class Despertar_heroe
     public static String CrearHeroe()
     {
         Scanner sc = new Scanner(System.in);
-        System.out.println("\nIntroduce el nombre de tu heroe");
+        System.out.println("\nIntroduce el nombre de tu heroe\n");
         String HeroeNom = sc.next();
         for (int i = 0; i < 10; i++) 
         {
@@ -185,23 +185,21 @@ public class Despertar_heroe
         return damageVillano;
     }
     
-    public static void HistoriaIntro(Heroe heroe1)
+    public static void HistoriaIntro(Heroe heroe)
     {
-        System.out.println("Mientras caminaba por un bosque envuelto en niebla, el joven "+heroe1.getNombre()+ " descubrió una pequeña cabaña "
-        +"iluminada por una luz extraña, donde un anciano mago lo esperaba como si hubiera estado aguardando su llegada durante siglos." 
-        +"El Señor de las Sombras ha despertado, susurró el mago, entregándole una espada antigua. Solo tú puedes detenerlo.");
-        System.out.println(heroe1.getNombre()+ "aceptó la espada y salió de la cabaña rumbo a las montañas del norte, donde se alzaba la fortaleza del villano."+ 
-        "Pero el camino no sería fácil: antes tendría que cruzar tierras malditas y enfrentarse a los siervos que guardaban cada paso hacia su destino.");
+        System.out.println(
+        "Mientras caminaba por un bosque envuelto en niebla, el joven "+heroe.getNombre()+ " descubrió una pequeña cabaña\n"
+        +"iluminada por una luz extraña, donde un anciano mago lo esperaba como si hubiera estado aguardando su llegada \ndurante siglos." 
+        +"El Señor de las Sombras ha despertado, susurró el mago, entregándole una espada antigua. Solo tú puedes detenerlo.\n");
+        System.out.println(heroe.getNombre()+ " aceptó la espada y salió de la cabaña rumbo a las montañas del norte, donde se alzaba la fortaleza del villano.\n"+ 
+        "Pero el camino no sería fácil: antes tendría que cruzar tierras malditas y enfrentarse a los siervos que guardaban \ncada paso hacia su destino.");
     }
-    public static void villanoIntro(Heroe heroe1)
+    public static void villanoIntro(Heroe heroe)
     {
-       System.out.println("Al cruzar un puente de piedra derruido, " + heroe1.getNombre() + " oye un arrastrar de cadenas que resuena entre la niebla. "
-        + "Grimdal el Encadenado emerge de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: \"Nadie cruza estas tierras sin pasar sobre mi cadáver\".");
+       System.out.println("Al cruzar un puente de piedra derruido, " + heroe.getNombre() + " oye un arrastrar de cadenas \nque resuena entre la niebla. "
+        + " Grimdal el Encadenado emerge de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: \nNadie cruza estas tierras sin pasar sobre mi cadáver.");
     }
-    public static void menuDuranteBatalla()
-    {
-        System.out.println("1. Atacar o defender\n"+"2. Usar un poción\n"+"3. Inventario\n"+"4. Abandonar\n");
-    }
+    
     
     public static void heroeAtacar(Heroe heroe, Villano villano)
     {    
@@ -213,7 +211,7 @@ public class Despertar_heroe
             villano.serAtacado(heroe.getDamage());
             
             System.out.println("heroe attac damage: "+heroe.getDamage());
-            System.out.println("Ataca hecha, el villano tiene "+villano.getHP()+" vida.");
+            System.out.println("Ataca hecha, el villano tiene "+villano.getHP()+" vida.\n");
         }
         if(heroe.serVivo() && !villano.serVivo())
         {
@@ -283,38 +281,94 @@ public class Despertar_heroe
         return opcion;  
     }
 
-    public static void atacarOdefender(int menuu, Heroe heroe, Villano villano )
+    public static void atacarOdefender(int menuBatalla, Heroe heroe, Villano villano )
     {
-        switch(menuu)
+        switch(menuBatalla)
         {
             case 1: heroeAtacar(heroe, villano);
             case 2 :VillanoAtacar(heroe, villano);
         }
 
     }
+    public static void menuDuranteBatalla()
+    {
+        System.out.println("1. Atacar \n"+"2. Defender \n"+"3. Usar un poción\n"+"4. Inventario\n"+"5. Abandonar\n");
+    }
+
+    public static boolean defender()
+    {
+        Random random = new Random();
+        int defend = random.nextInt(0,1);
+        if(defend == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+        
+    }
+
     public static void primerBattala(Heroe heroe, Villano villano)
     {
         Scanner sc = new Scanner(System.in);
-        boolean jugar = true;
-        while(jugar)
-        {
-            if(heroe.serVivo() && villano.serVivo())
+        boolean turnoAt;
+        boolean turnoDef;
+        turnoAt = true;
+        turnoDef = false;
+        Filler();
+        System.out.println("La batalla contra "+villano.getNombre()+" comienza");
+        do
+        {   
+            Filler();
+            menuDuranteBatalla();
+            int opcion = sc.nextInt();
+            switch(opcion)
             {
-                
-                menuDuranteBatalla();
-                int menuu = intLimitCheck(sc);
-                switch(menuu)
+            case 1: 
+                if(turnoAt == true)
                 {
-                    case 1: 
+                    heroeAtacar(heroe, villano);
+                    turnoAt = false;
+                    turnoDef = true;    
                 }
-                heroeAtacar(heroe, villano);
-                VillanoAtacar(heroe, villano);
+                else
+                {
+                    System.out.println("No puedes atacar dos veces seguidas");  
+                }
+                break;
+            case 2: 
+                if(turnoDef == true)
+                {
+                    turnoDef = false;
+                    turnoAt = true;
+                    if(defender() == true)
+                    {
+                    System.out.println("Ataque de "+villano.getNombre()+" fue defendida");
+                    }
+                    else
+                    {
+                    VillanoAtacar(heroe, villano);
+                    }
+                }
+                else
+                {
+                    System.out.println("No puedes defender dos veces seguidas");
+                    
+                }
+                break;
+            case 3: System.out.println("en proceso");
+            case 4: System.out.println("en proceso");
+            case 5: System.out.println("en proceso");
+            default: 
+            System.out.println("Opción no válida");
+            break;
             }
-            else
-            {
-                jugar = false;
-            }
-        }
+            
+        }while(heroe.serVivo() && villano.serVivo());
+        System.out.println("Enhorabuena, has ganado a "+villano.getNombre()+", pero tu camino no termina aqui.");
+        
     }
 
     public static void primerVillano(Villano villano)
@@ -351,13 +405,15 @@ public class Despertar_heroe
         OpcionMenu(opcion);
         
         String HeroeNom = CrearHeroe();
-        Heroe heroe = new Heroe("", 100,1,0,0,3);
-        heroe.setNombre(HeroeNom);
+        Heroe heroe = new Heroe(HeroeNom, 100,1,0,0,3);
+       
 
         Villano villano = new Villano("", 0, 0,0 );
         primerVillano(villano);
-
-        primerBattala(heroe,villano);
+        HistoriaIntro(heroe);
+        villanoIntro(heroe);
+        primerBattala(heroe, villano);
+        
         
 
     }
