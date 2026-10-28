@@ -184,6 +184,24 @@ public class Despertar_heroe
         int damageVillano = random.nextInt(5,15);
         return damageVillano;
     }
+    
+    public static void battaleIntro(Heroe heroe1)
+    {
+        System.out.println("Mientras caminaba por un bosque envuelto en niebla, el joven "+heroe1.getNombre()+ " descubrió una pequeña cabaña "
+        +"iluminada por una luz extraña, donde un anciano mago lo esperaba como si hubiera estado aguardando su llegada durante siglos." 
+        +"El Señor de las Sombras ha despertado, susurró el mago, entregándole una espada antigua. Solo tú puedes detenerlo.");
+        System.out.println(heroe1.getNombre()+ "aceptó la espada y salió de la cabaña rumbo a las montañas del norte, donde se alzaba la fortaleza del villano."+ 
+        "Pero el camino no sería fácil: antes tendría que cruzar tierras malditas y enfrentarse a los siervos que guardaban cada paso hacia su destino.");
+    }
+    public static void primerVillanoIntro(Heroe heroe1)
+    {
+        System.out.println("Al cruzar un puente de piedra derruido, "+heroe1.getNombre()+" oyó un arrastrar de cadenas que resonaba entre la niebla." 
+        +"Grimdal el Encadenado emergió de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: Nadie cruza estas tierras sin pasar sobre mi cadáver.");
+    }
+    public static void primerBattala()
+    {
+
+    }
 
     public static void main(String[] args) 
     {
@@ -197,9 +215,11 @@ public class Despertar_heroe
         Heroe heroe1 = new Heroe("", 100,1,0,0,3);
         heroe1.setNombre(HeroeNom);
         
-        Villano villano1 = new Villano("Mago ",40 , 1, 40);
-        heroe1.MostrarStats();
-        //villano1.MostrarStats();
+        Villano primerVillano = new Villano("Grimdal el Encadenado", 40, 1,0 );
+        Villano segundoVillano = new Villano("Vessa la Susurrante", 60, 2, 0);
+        Villano finalBoss = new Villano("Señor de las Sombras ",80 , 3, 0);
+        
+        
         
     }
 }
