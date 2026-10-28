@@ -193,7 +193,7 @@ public class Despertar_heroe
         System.out.println(heroe1.getNombre()+ "aceptó la espada y salió de la cabaña rumbo a las montañas del norte, donde se alzaba la fortaleza del villano."+ 
         "Pero el camino no sería fácil: antes tendría que cruzar tierras malditas y enfrentarse a los siervos que guardaban cada paso hacia su destino.");
     }
-    public static void primerVillanoIntro(Heroe heroe1)
+    public static void villanoIntro(Heroe heroe1)
     {
        System.out.println("Al cruzar un puente de piedra derruido, " + heroe1.getNombre() + " oye un arrastrar de cadenas que resuena entre la niebla. "
         + "Grimdal el Encadenado emerge de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: \"Nadie cruza estas tierras sin pasar sobre mi cadáver\".");
@@ -203,46 +203,46 @@ public class Despertar_heroe
         System.out.println("1. Atacar o defender\n"+"2. Usar un poción\n"+"3. Inventario\n"+"4. Abandonar\n");
     }
     
-    public static void heroeAtacar(Heroe heroe, Villano primerVillano)
+    public static void heroeAtacar(Heroe heroe, Villano villano)
     {    
-        if(heroe.serVivo() && primerVillano.serVivo());
+        if(heroe.serVivo() && villano.serVivo());
         {
             heroe.setDamage(DamageHeroe());
             
             System.out.println("Atacando...");
-            primerVillano.serAtacado(heroe.getDamage());
+            villano.serAtacado(heroe.getDamage());
             
             System.out.println("heroe attac damage: "+heroe.getDamage());
-            System.out.println("Ataca hecha, el villano tiene "+primerVillano.getHP()+" vida.");
+            System.out.println("Ataca hecha, el villano tiene "+villano.getHP()+" vida.");
         }
-        if(heroe.serVivo() && !primerVillano.serVivo())
+        if(heroe.serVivo() && !villano.serVivo())
         {
             System.out.println(heroe.getNombre()+" gano la batalla");
         }
-        if(!heroe.serVivo() && primerVillano.serVivo())
+        if(!heroe.serVivo() && villano.serVivo())
         {
             System.out.println(heroe.getNombre()+" perdio la batalla");
         }
 
     }
 
-    public static void PrimerVillanoAtacar(Heroe heroe, Villano primerVillano)
+    public static void VillanoAtacar(Heroe heroe, Villano villano)
     {
-        if(heroe.serVivo() && primerVillano.serVivo());
+        if(heroe.serVivo() && villano.serVivo());
         {
-            primerVillano.setDamage(DamageVillano());
+            villano.setDamage(DamageVillano());
             
             System.out.println("Villano atacando...");
-            heroe.serAtacado(primerVillano.getDamage());
+            heroe.serAtacado(villano.getDamage());
             
-            System.out.println("villano attac damage: "+primerVillano.getDamage());
+            System.out.println(villano.getNombre()+"villano attac damage: "+villano.getDamage());
             System.out.println("Ataca hecha,"+heroe.getNombre()+" tiene "+heroe.getHP()+" vida.");
         }
-        if(heroe.serVivo() && !primerVillano.serVivo())
+        if(heroe.serVivo() && !villano.serVivo())
         {
             System.out.println(heroe.getNombre()+" gano la batalla");
         }
-        if(!heroe.serVivo() && primerVillano.serVivo())
+        if(!heroe.serVivo() && villano.serVivo())
         {
             System.out.println(heroe.getNombre()+" perdio la batalla");
         }
@@ -250,18 +250,18 @@ public class Despertar_heroe
 
       
 
-    public static void primerBattalaMenu(Heroe heroe, Villano primerVillano )
+    public static void primerBattalaMenu(Heroe heroe, Villano villano )
     {
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("La batalla contra "+primerVillano.getNombre()+" comienza");
+        System.out.println("La batalla contra "+villano.getNombre()+" comienza");
         System.out.println("1. Atacar\n"+"2. Abondonar\n");
         int opMenuBatalla = intLimit2(sc);
 
         switch(opMenuBatalla)
         {
             case 1:
-                primerBattala(heroe, primerVillano);
+                primerBattala(heroe, villano);
                 break;
 
             case 2:
@@ -282,22 +282,23 @@ public class Despertar_heroe
         }while(!(opcion >=1 && opcion<=2));
         return opcion;  
     }
-    public static void atacarOdefender(int menuu, Heroe heroe, Villano )
+
+    public static void atacarOdefender(int menuu, Heroe heroe, Villano villano )
     {
         switch(menuu)
         {
-            case 1: heroeAtacar(heroe, primerVillano);
-            case 2 :PrimerVillanoAtacar(heroe, primerVillano);
+            case 1: heroeAtacar(heroe, villano);
+            case 2 :VillanoAtacar(heroe, villano);
         }
 
     }
-    public static void primerBattala(Heroe heroe, Villano primerVillano)
+    public static void primerBattala(Heroe heroe, Villano villano)
     {
         Scanner sc = new Scanner(System.in);
         boolean jugar = true;
         while(jugar)
         {
-            if(heroe.serVivo() && primerVillano.serVivo())
+            if(heroe.serVivo() && villano.serVivo())
             {
                 
                 menuDuranteBatalla();
@@ -306,8 +307,8 @@ public class Despertar_heroe
                 {
                     case 1: 
                 }
-                heroeAtacar(heroe, primerVillano);
-                PrimerVillanoAtacar(heroe, primerVillano);
+                heroeAtacar(heroe, villano);
+                VillanoAtacar(heroe, villano);
             }
             else
             {
@@ -316,10 +317,35 @@ public class Despertar_heroe
         }
     }
 
+    public static void primerVillano(Villano villano)
+    {
+        villano.setNombre("Grimdal el Encadenado");
+        villano.setHP(40);
+        villano.setNivel(1);  
+    }
+
+    public static void segundoVillano(Villano villano)
+    {
+        villano.setNombre("Vessa la Susurrante");
+        villano.setHP(60);
+        villano.setNivel(2);  
+    }
+
+    public static void tercerVillano(Villano villano)
+    {
+        villano.setNombre("El Señor de las Sombras");
+        villano.setHP(80);
+        villano.setNivel(3);  
+    }
+
+
+
+
     public static void main(String[] args) 
     {
         Scanner sc = new Scanner(System.in);
         String user = Intro();
+        
         Menu();
         int opcion = intLimitCheck(sc);
         OpcionMenu(opcion);
@@ -327,12 +353,12 @@ public class Despertar_heroe
         String HeroeNom = CrearHeroe();
         Heroe heroe = new Heroe("", 100,1,0,0,3);
         heroe.setNombre(HeroeNom);
+
+        Villano villano = new Villano("", 0, 0,0 );
+        primerVillano(villano);
+
+        primerBattala(heroe,villano);
         
-        Villano primerVillano = new Villano("Grimdal el Encadenado", 40, 1,0 );
-        Villano segundoVillano = new Villano("Vessa la Susurrante", 60, 2, 0);
-        Villano finalVillano = new Villano("Señor de las Sombras ",80 , 3, 0);
-        
-        primerBattala(heroe,primerVillano);
 
     }
 }
