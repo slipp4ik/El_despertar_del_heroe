@@ -45,4 +45,18 @@ public class Characters
         Damage = damage;
     }
 
+    public void serAtacado()
+    {
+        HP -= Damage;
+        if(HP < 0)
+        {
+            HP = 0;
+        }
+    }
+
+    public boolean serVivo()
+    {
+        return HP > 0;
+    }
+        
 }
