@@ -206,7 +206,7 @@ public class Despertar_heroe
     {
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("La batalla c");  
+        System.out.println("La batalla con");  
     }
 
     public static void main(String[] args) 
