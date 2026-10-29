@@ -252,14 +252,14 @@ public class Despertar_heroe
         System.out.println("1. Atacar \n"+"2. Defender \n"+"3. Usar un poción\n"+"4. Inventario\n"+"5. Abandonar\n");
     }
 
-    public static boolean defender(Villano villano) // posibilidad 50/50 de defender el ataque del villano
+    public static boolean defender(Villano villano) 
     {
         Random random = new Random();
         int nivelVillano = villano.getNivel();
         switch(nivelVillano)
         {
         case 1: 
-            int defend1 = random.nextInt(0,2);
+            int defend1 = random.nextInt(0,2);  // posibilidad 50% de defender el ataque del villano
             if(defend1 == 0)
             {
                 return false;
@@ -269,7 +269,7 @@ public class Despertar_heroe
                 return true;
             }
         case 2:
-            int defend2 = random.nextInt(0,3);
+            int defend2 = random.nextInt(0,3);  // posibilidad 33.3% de defender el ataque del villano
             if(defend2 == 0 || defend2 == 1)
             {
                 return false;
@@ -279,7 +279,7 @@ public class Despertar_heroe
                 return true;
             }
         case 3:
-            int defend3 = random.nextInt(0,4);
+            int defend3 = random.nextInt(0,4);  // posibilidad 25% de defender el ataque del villano
             if(defend3 == 0 || defend3 == 1 || defend3 == 2)
             {
                 return false;
@@ -294,13 +294,28 @@ public class Despertar_heroe
         
     }
 
+    public static void UsarPocion(Heroe heroe)
+    {
+        int HPactual = heroe.getHP();
+        int MaxHp = 100;
+        HPactual += 25;
+        if(HPactual > MaxHp)
+        {
+            HPactual = 100;
+        }
+        heroe.setHP(HPactual);
+        
+    }
+
     public static void Batalla(Heroe heroe, Villano villano) // el metodo de batalla principal
     {
         Scanner sc = new Scanner(System.in);
         boolean turnoAt;
         boolean turnoDef;
+        int limitPocion = 3;
         turnoAt = true;
         turnoDef = false;
+        
         Filler();
         System.out.println("La batalla contra "+villano.getNombre()+" comienza");
         do
@@ -341,7 +356,20 @@ public class Despertar_heroe
                     System.out.println("No puedes defender aun");  
                 }
                 break;
-            case 3: System.out.println("en proceso"); break;
+            case 3:
+                if(limitPocion==3 || limitPocion==2 || limitPocion ==1)
+                {
+                    UsarPocion(heroe); 
+                    limitPocion--;
+                    System.out.println("Has regenerado 25 unidades de vida, ahora tienes "+heroe.getHP()+" y te quedan "+limitPocion+" pociones");
+                }
+                else
+                {
+                    System.out.println("No te quedan pociones de regenerar");
+                }
+                
+            
+            break;
             case 4: System.out.println("en proceso"); break;
             case 5: System.out.println("en proceso"); break;
             default: 
