@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="RankingTest.xslt"?>
+<ranking>
+    <jugador id="1">
+        <usuario>Egor</usuario>
+        <puntos>120</puntos>
+    </jugador>
+    <jugador id="2">
+        <usuario>Juan</usuario>
+        <puntos>100</puntos>
+    </jugador>
+</ranking>
