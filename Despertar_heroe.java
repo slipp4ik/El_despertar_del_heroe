@@ -84,7 +84,7 @@ public class Despertar_heroe
 
     }
 
-    public static int intLimitCheck(Scanner sc, int x) //comprobar si el numero es 1-4 
+    public static int intLimitCheck(Scanner sc, int x) // el int x es el limite que quieres tener
     {
         int opcion;
         do
