@@ -1,4 +1,4 @@
-public class Villano extends Characters
+public class Villano extends Personajes
 {
     public Villano(String Nombre, int HP, int Nivel, int Damage)
     {
@@ -6,7 +6,6 @@ public class Villano extends Characters
     }
     public void MostrarStats()
     {
-        System.out.println("\nEl nombe de tu enemigo es: "+getNombre()+
-                "\nNivel actual: "+getNivel() +"\nCantidad de vida: "+getHP()+"\nDaño por ataque es de 5 a 15");
+        System.out.println("\nCantidad de vida: "+getHP()+"\nDaño por ataque es de 5 a 15");
     }
 }

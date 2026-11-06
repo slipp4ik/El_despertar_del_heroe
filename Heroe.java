@@ -1,4 +1,4 @@
-public class Heroe extends Characters
+public class Heroe extends Personajes
 {
     private int Pts; //puntos
     private int Pocion; 
