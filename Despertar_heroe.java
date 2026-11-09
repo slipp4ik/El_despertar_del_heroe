@@ -1,16 +1,11 @@
-//El despertar del heroe 
-
 import java.util.Random;
 import java.util.Scanner;
-
-
 public class Despertar_heroe 
 {
     public static final String RED = "\u001B[31m";
     public static final String RESET = "\u001B[0m";
     public static final String GREEN = "\u001B[32m";
     public static final String ORANGE = "\u001B[38;5;166m";
-
     //alternativa para utilizar timeout sin throws InterruptedException
     //hecho con ayuda de IA
     public static void TimeOut(int milliseconds)  
@@ -41,7 +36,6 @@ public class Despertar_heroe
         Filler();
         System.out.println(GREEN+"\nEl usuario "+usuario+" guardado correctamente\n"+RESET);
         Filler();
-
         return usuario;
     }
 
@@ -57,6 +51,7 @@ public class Despertar_heroe
     {
         if(!sc.hasNextInt())
         {
+            Filler();
             System.out.println(RED+"\nError: Tienes que introducir un numero\n"+RESET);
             sc.next();
             return false;
@@ -81,7 +76,6 @@ public class Despertar_heroe
                 }
         }
         return opcion;
-
     }
 
     public static int intLimitCheck(Scanner sc, int x) // el int x es el limite que quieres tener
@@ -92,6 +86,7 @@ public class Despertar_heroe
             opcion = MenuCheck(sc);
             if(!(opcion >=1 && opcion<=x))
             {
+                Filler();
                 System.out.println(RED+"\nError: Tienes que introducir un numero 1-4\n"+RESET);
                 Menu();
             }
@@ -106,8 +101,7 @@ public class Despertar_heroe
         {
             TimeOut(80);
             System.out.print(RED + "|" + RESET);
-        }
-        
+        }  
         for (int i = 0; i < 12; i++) 
         {
             TimeOut(80);
@@ -123,7 +117,6 @@ public class Despertar_heroe
     public static void Ayuda()//opcion ayuda del menu
     {
         Scanner sc = new Scanner(System.in);
-
         System.out.println("\nLas reglas del juego son: \n"
         +"Tienes que ganar a tres diferentes villanos durante tu camino.\n"
         +"Cada villano ganado te añade 100 puntos, los cuales puedes consultar en Ranking.\n"+
@@ -161,7 +154,6 @@ public class Despertar_heroe
         {
             Menu();
             int opcion = intLimitCheck(sc, 4);
-        
             switch(opcion)
             {
                 case 1: 
@@ -201,7 +193,6 @@ public class Despertar_heroe
         int damageHeroe = random.nextInt(10,20);
         return damageHeroe;
     }
-
     public static int DamageVillano() // crear el daño para el villano, usando random
     {
         Random random = new Random();
@@ -233,19 +224,18 @@ public class Despertar_heroe
         segundoVillano(villano);
         Filler();
         Filler();
-        AñadirPuntos(heroe);
+        AniadirPuntos(heroe);
         System.out.println("Grimdal cae de rodillas y sus cadenas se deshacen en polvo. "+heroe.getNombre()+" recoge de su armadura un colgante\ncon un símbolo oscuro y sigue su camino."
             +"El sendero se adentra en un pantano cubierto de niebla,\ndonde los árboles retorcidos parecen observarlo en silencio. Entre las ramas,"+heroe.getNombre()+" cruza nruinas olvidadas y\nescucha los primeros susurros que llaman a su nombre."
             +"Al llegar a un claro iluminado por una luna pálida,\nVessa la Susurrante aparece flotando entre las sombras:Has llegado muy lejos, \npero mis voces te harán dudar de todo.");
         
     }
-
     public static void finalSegundaBatalla(Heroe heroe, Villano villano)
     {
         tercerVillano(villano);
         Filler();
         Filler();
-        AñadirPuntos(heroe);
+        AniadirPuntos(heroe);
         System.out.println("Vessa la Susurrante lanza un último lamento y su figura se disuelve en el aire, llevándose consigo las voces que atormentaban a "+heroe.getNombre()+"\n" 
        +"El silencio vuelve al pantano y, entre la niebla que se disipa, aparece un camino de piedra negra que sube hacia las montañas del norte.\n"
         +"Tras una larga ascensión, el héroe llega a las puertas de la fortaleza, donde el viento aúlla entre torres rotas y el colgante de Grimdal\n"
@@ -253,12 +243,11 @@ public class Despertar_heroe
         +"lo espera el Señor de las Sombras. Has derrotado a mis siervos, pequeño héroe, dice con una voz que hace temblar los muros.\n"
         +"Pero aquí termina tu viaje. Ven, y comprueba cuánto pesa la oscuridad.");
     }
-
     public static void finalTercerBatalla(Heroe heroe)
     {
         Filler();
         Filler();
-        AñadirPuntos(heroe);
+        AniadirPuntos(heroe);
         System.out.println("El Señor de las Sombras se derrumba con un rugido que sacude toda la fortaleza. Su trono se resquebraja y\n"  
         +"la oscuridad que lo rodeaba se desvanece como humo arrastrado por el viento. El colgante de Grimdal se parte en dos y\n" 
         +"su luz oscura se apaga para siempre.\n"
@@ -285,25 +274,10 @@ public class Despertar_heroe
         if(heroe.serVivo() && villano.serVivo())
         {
             villano.setDamage(DamageVillano());
-            
             System.out.println("Villano atacando...");
             heroe.serAtacado(villano.getDamage());
             System.out.println("Ataque realizada con "+villano.getDamage()+" de daño, tienes "+heroe.getHP()+" de vida.");
         }
-    }
-
-    public static int intLimit2(Scanner sc) //comprobar si el numero es 1-2
-    {
-        int opcion;
-        do
-        {
-            opcion = MenuCheck(sc);
-            if(!(opcion >=1 && opcion<=2))
-            {
-                System.out.println(RED+"\nError: Tienes que introducir un numero 1-2\n"+RESET);
-            }
-        }while(!(opcion >=1 && opcion<=2));
-        return opcion;  
     }
 
     //opcion del menu de defender el ataque del villano---------
@@ -346,7 +320,6 @@ public class Despertar_heroe
         default:
             return false;
         }
-        
     }
 
     //regenerar HP con una pocion, opcion del menu---------
@@ -360,7 +333,6 @@ public class Despertar_heroe
             HPactual = 100;
         }
         heroe.setHP(HPactual);
-        
     }
 
     //menus durante la batalla----------------------
@@ -374,12 +346,11 @@ public class Despertar_heroe
     }
    
     //puntos para el ranking --------------------
-    public static void AñadirPuntos(Heroe heroe)
+    public static void AniadirPuntos(Heroe heroe)
     {
        int PtsActual = heroe.getPts();
        PtsActual += 100;
        heroe.setPts(PtsActual);
-    
     }
     
     public static void Batalla(Heroe heroe, Villano villano, String[]inventario) // el metodo de batalla principal
@@ -400,9 +371,18 @@ public class Despertar_heroe
             int opcion = 0;
             if(turnoAt == true)
             {
-                Filler();
-                menuSinPosibilidadDefender();
-                opcion = sc.nextInt();
+                boolean repeat = true;
+                while(repeat == true)
+                {
+                    Filler();
+                    menuSinPosibilidadDefender();
+                
+                    if(intCheck(sc))
+                    {
+                        opcion = sc.nextInt();
+                        repeat = false;
+                    }
+                }
                 if(opcion != 1)
                 {
                     opcion+=1;
@@ -410,10 +390,18 @@ public class Despertar_heroe
             }
             else
             {
-                Filler();
-                menuSinPosibilidadAtacar();
-                opcion = sc.nextInt();
-                opcion += 1;
+                boolean repeat = true;
+                while(repeat == true)
+                {
+                    Filler();
+                    menuSinPosibilidadAtacar();
+                    if(intCheck(sc))
+                    {
+                        opcion = sc.nextInt();
+                        repeat = false;
+                    }
+                }
+                    opcion+=1;  
             }
             
             Filler();
@@ -481,8 +469,7 @@ public class Despertar_heroe
             default: 
             System.out.println(RED+"\nOpción no válida"+RESET);
             break;
-            }
-            
+            } 
         }while(heroe.serVivo() && villano.serVivo());    
     }
 
@@ -528,35 +515,23 @@ public class Despertar_heroe
             }
         }
     }
-
-
-
     public static void main(String[] args) 
     {
         Scanner sc = new Scanner(System.in);
         String user = Intro();
-
         OpcionMenu();
         String HeroeNom = CrearHeroe();
         Heroe heroe = new Heroe(HeroeNom, 100,1,0,0,3);
         Villano villano = new Villano("", 0, 0,0 );
         String[] inventario = inventario();
-        
-        HistoriaIntro(heroe); //Y
-    
-        villanoIntro(heroe, villano); //Y
-
-        Batalla(heroe, villano, inventario); //Y
-
+        HistoriaIntro(heroe);
+        villanoIntro(heroe, villano);
+        Batalla(heroe, villano, inventario);
         finalPrimeraBatalla(heroe, villano);
-        
         Batalla(heroe, villano, inventario);
-
         finalSegundaBatalla(heroe, villano);
-
         Batalla(heroe, villano, inventario);
-
         finalTercerBatalla(heroe);
-
+        sc.close();
     }
 }
