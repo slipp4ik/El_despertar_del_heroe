@@ -463,6 +463,9 @@ public class Despertar_heroe
                     UsarPocion(heroe); 
                     limitPocion--;
                     System.out.println("\nHas regenerado 25 unidades de vida, ahora tienes "+heroe.getHP()+" y te quedan "+limitPocion+" pociones");
+                    System.out.println("Has consumido tu tuno, ahore es el turno del enemigo");
+                    turnoAt = false;
+                    turnoDef = true;
                     for(int i =0; i<inventario.length; i++)
                     {
                         if(inventario[i] != null)
