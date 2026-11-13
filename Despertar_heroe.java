@@ -569,6 +569,16 @@ public class Despertar_heroe
              return false;
         }
     }
+
+    public static void FinPorMuerte(Heroe heroe, String user)
+    {
+        Filler();
+        System.out.println(RED+heroe.getNombre()+" ha sido derrotado" + RESET);
+        RankingAniadir(user, heroe.getPts());
+        TimeOut(1000);
+        Filler();
+    }
+
     public static void main(String[] args) 
     {
         CrearRankingXML.crearArchivo();
@@ -584,19 +594,32 @@ public class Despertar_heroe
             String[] inventario = inventario();
             HistoriaIntro(heroe);
             villanoIntro(heroe, villano);
-            while(!HeroeMUerto(heroe))
+            Batalla(heroe, villano, inventario);
+            
+            if(HeroeMUerto(heroe))
             {
-                Batalla(heroe, villano, inventario);
-                finalPrimeraBatalla(heroe, villano);
-                Batalla(heroe, villano, inventario);
+                FinPorMuerte(heroe, user);
+                continue;
+            }
+            finalPrimeraBatalla(heroe, villano);
+            Batalla(heroe, villano, inventario);
+            if(HeroeMUerto(heroe))
+            {
+                FinPorMuerte(heroe, user);
+                continue; 
+            }
                 finalSegundaBatalla(heroe, villano);
                 Batalla(heroe, villano, inventario);
-                int OpcionFinal = finalTercerBatalla(heroe);
-                int puntos = heroe.getPts();
-                RankingAniadir(user, puntos); 
-                MenuFinal(OpcionFinal);
+            if(HeroeMUerto(heroe))
+            {
+                FinPorMuerte(heroe, user);
+                continue;  
             }
-            Menu();
+                int OpcionFinal = finalTercerBatalla(heroe);
+               
+                RankingAniadir(user, heroe.getPts()); 
+                MenuFinal(OpcionFinal);
+
         }while(jugar); 
     }
 }
