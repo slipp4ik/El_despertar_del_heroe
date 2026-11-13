@@ -518,23 +518,90 @@ public class Despertar_heroe
             }
         }
     }
+
+    public static void RankingAniadir(String nombre, int puntos) 
+    {
+        ModificarXML.guardarJugador(nombre, puntos);
+    }
+//("Introduce:\n"+"1. Ver ranking\n"+"2. Volver al menu principal\n"+"3. Salir del juego");
+    public static void MenuFinal(int OpcionFinal)
+    {
+        switch (OpcionFinal) 
+        {
+            case 1:
+                ConsultarRanking();
+                TimeOut(5000);
+                break;
+            case 2:
+                Salir();
+            default:
+                System.out.println("Error");
+        }
+    }
+
+    public static boolean HeroeMUerto(Heroe heroe)
+    {
+        if(!heroe.serVivo())
+        {
+            return true;
+        }
+        else
+        {
+             return false;
+        }
+    }
+
+    public static void FinPorMuerte(Heroe heroe, String user)
+    {
+        Filler();
+        System.out.println(RED+heroe.getNombre()+" ha sido derrotado" + RESET);
+        RankingAniadir(user, heroe.getPts());
+        TimeOut(1000);
+        Filler();
+    }
+
     public static void main(String[] args) 
     {
-        Scanner sc = new Scanner(System.in);
-        String user = Intro();
-        OpcionMenu();
-        String HeroeNom = CrearHeroe();
-        Heroe heroe = new Heroe(HeroeNom, 100,1,0,0,3);
-        Villano villano = new Villano("", 0, 0,0 );
-        String[] inventario = inventario();
-        HistoriaIntro(heroe);
-        villanoIntro(heroe, villano);
-        Batalla(heroe, villano, inventario);
-        finalPrimeraBatalla(heroe, villano);
-        Batalla(heroe, villano, inventario);
-        finalSegundaBatalla(heroe, villano);
-        Batalla(heroe, villano, inventario);
-        finalTercerBatalla(heroe);
-        sc.close();
+        CrearRankingXML.crearArchivo();
+        
+        boolean jugar = true;
+        Intro();
+        do
+        {
+            String user = OpcionMenu();
+            String HeroeNom = CrearHeroe();
+            Heroe heroe = new Heroe(HeroeNom, 10,1,0,0,3);
+            Villano villano = new Villano("", 0, 0,0 );
+            String[] inventario = inventario();
+            HistoriaIntro(heroe);
+            villanoIntro(heroe, villano);
+            Batalla(heroe, villano, inventario);
+            
+            if(HeroeMUerto(heroe))
+            {
+                FinPorMuerte(heroe, user);
+                continue;
+            }
+            finalPrimeraBatalla(heroe, villano);
+            Batalla(heroe, villano, inventario);
+            if(HeroeMUerto(heroe))
+            {
+                FinPorMuerte(heroe, user);
+                continue; 
+            }
+                finalSegundaBatalla(heroe, villano);
+                Batalla(heroe, villano, inventario);
+            if(HeroeMUerto(heroe))
+            {
+                FinPorMuerte(heroe, user);
+                continue;  
+            }
+                int OpcionFinal = finalTercerBatalla(heroe);
+               
+                RankingAniadir(user, heroe.getPts()); 
+                MenuFinal(OpcionFinal);
+
+        }while(jugar); 
+
     }
 }
