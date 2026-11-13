@@ -25,18 +25,12 @@ public class Despertar_heroe
         System.out.println("____________________________________________");
     }
 
-    public static String Intro()//introduccion + hay que guardar el usuario 
+    public static void Intro()//introduccion + hay que guardar el usuario 
     {
-        Scanner sc = new Scanner(System.in);
+    
         Filler();
         System.out.println("Bienvenido a El despertar del heroe");
-        TimeOut(500);
-        System.out.println("\nIntroduce tu usuario para guardar las partidas:\n");
-        String usuario = sc.next();
-        Filler();
-        System.out.println(GREEN+"\nEl usuario "+usuario+" guardado correctamente\n"+RESET);
-        Filler();
-        return usuario;
+       
     }
 
     public static void Menu() //un menu-> nueva partida, consultar ranking, ayuda, salir
@@ -94,8 +88,16 @@ public class Despertar_heroe
         return opcion;  
     }
 
-    public static void NuevaPartida()//opcion nueva partida del menu
-    {
+    public static String NuevaPartida()//opcion nueva partida del menu
+    {   
+        Scanner sc = new Scanner(System.in);
+
+        TimeOut(500);
+        System.out.println("\nIntroduce tu usuario para guardar las partidas:\n");
+        String usuario = sc.next();
+        Filler();
+        System.out.println(GREEN+"\nEl usuario "+usuario+" guardado correctamente\n"+RESET);
+        Filler();
         System.out.println("\nCreando nueva partida");
         for (int i = 0; i < 10; i++) 
         {
@@ -107,11 +109,12 @@ public class Despertar_heroe
             TimeOut(80);
             System.out.print(ORANGE + "|" + RESET);
         } 
+        return usuario;
     }
 
     public static void ConsultarRanking()//opcion consultar ranking del menu
     {
-        System.out.println("Aun no hecho");
+        LeerRankingXML.RankingLector();
     }
 
     public static void Ayuda()//opcion ayuda del menu
@@ -147,7 +150,7 @@ public class Despertar_heroe
         System.out.println("Hasta luego...");
         System.exit(0);
     }
-    public static void OpcionMenu()//1.nueva partida, 2.consultar ranking, 3.ayuda, 4.salir
+    public static String OpcionMenu()//1.nueva partida, 2.consultar ranking, 3.ayuda, 4.salir
     {
         Scanner sc = new Scanner(System.in);
         while(true)
@@ -157,8 +160,7 @@ public class Despertar_heroe
             switch(opcion)
             {
                 case 1: 
-                        NuevaPartida();
-                        return;
+                        return NuevaPartida();
                 case 2:
                         ConsultarRanking();                        
                         break;
@@ -243,11 +245,13 @@ public class Despertar_heroe
         +"lo espera el Señor de las Sombras. Has derrotado a mis siervos, pequeño héroe, dice con una voz que hace temblar los muros.\n"
         +"Pero aquí termina tu viaje. Ven, y comprueba cuánto pesa la oscuridad.");
     }
-    public static void finalTercerBatalla(Heroe heroe)
+    public static int finalTercerBatalla(Heroe heroe)
     {
+        Scanner sc = new Scanner(System.in);
         Filler();
         Filler();
         AniadirPuntos(heroe);
+        BonoPuntos(heroe);
         System.out.println("El Señor de las Sombras se derrumba con un rugido que sacude toda la fortaleza. Su trono se resquebraja y\n"  
         +"la oscuridad que lo rodeaba se desvanece como humo arrastrado por el viento. El colgante de Grimdal se parte en dos y\n" 
         +"su luz oscura se apaga para siempre.\n"
@@ -255,6 +259,11 @@ public class Despertar_heroe
         +"Desde lo alto de las montañas, el héroe contempla las tierras que vuelven a la vida: la niebla se retira,\n"
         +"el pantano se aclara y el bosque despierta. En la lejanía, junto a una pequeña cabaña, el anciano mago alza\n"
         +"la mano en señal de despedida. La leyenda del héroe acaba de comenzar, y su nombre será recordado por todos.");
+        Filler();
+        Filler();
+        System.out.println("Introduce:\n"+"1. Ver ranking y volver al menu principal\n"+"2. Salir del juego");
+        int finalopcion = sc.nextInt();
+        return finalopcion;
     }
     //-------------------------------------------------
     
@@ -352,6 +361,14 @@ public class Despertar_heroe
        PtsActual += 100;
        heroe.setPts(PtsActual);
     }
+
+    public static void BonoPuntos(Heroe heroe)
+    {
+        int BonoPuntos = heroe.getHP();
+        int PtsActual = heroe.getPts();
+        PtsActual += BonoPuntos;
+        heroe.setPts(PtsActual);
+    }
     
     public static void Batalla(Heroe heroe, Villano villano, String[]inventario) // el metodo de batalla principal
     {
@@ -376,6 +393,7 @@ public class Despertar_heroe
                 {
                     Filler();
                     menuSinPosibilidadDefender();
+                    Filler();
                 
                     if(intCheck(sc))
                     {
@@ -395,6 +413,7 @@ public class Despertar_heroe
                 {
                     Filler();
                     menuSinPosibilidadAtacar();
+                    Filler();
                     if(intCheck(sc))
                     {
                         opcion = sc.nextInt();
@@ -471,8 +490,8 @@ public class Despertar_heroe
             case 5: Salir(); break;
             default: 
             System.out.println(RED+"\nOpción no válida"+RESET);
-            break;
-            } 
+            break; 
+        }
         }while(heroe.serVivo() && villano.serVivo());    
     }
 
@@ -602,6 +621,5 @@ public class Despertar_heroe
                 MenuFinal(OpcionFinal);
 
         }while(jugar); 
-
     }
 }
