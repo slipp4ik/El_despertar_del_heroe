@@ -490,8 +490,8 @@ public class Despertar_heroe
             case 5: Salir(); break;
             default: 
             System.out.println(RED+"\nOpción no válida"+RESET);
-            break;
-            } 
+            break; 
+        }
         }while(heroe.serVivo() && villano.serVivo());    
     }
 
@@ -557,6 +557,18 @@ public class Despertar_heroe
                 System.out.println("Error");
         }
     }
+
+    public static boolean HeroeMUerto(Heroe heroe)
+    {
+        if(!heroe.serVivo())
+        {
+            return true;
+        }
+        else
+        {
+             return false;
+        }
+    }
     public static void main(String[] args) 
     {
         CrearRankingXML.crearArchivo();
@@ -567,20 +579,24 @@ public class Despertar_heroe
         {
             String user = OpcionMenu();
             String HeroeNom = CrearHeroe();
-            Heroe heroe = new Heroe(HeroeNom, 100,1,0,0,3);
+            Heroe heroe = new Heroe(HeroeNom, 10,1,0,0,3);
             Villano villano = new Villano("", 0, 0,0 );
             String[] inventario = inventario();
             HistoriaIntro(heroe);
             villanoIntro(heroe, villano);
-            Batalla(heroe, villano, inventario);
-            finalPrimeraBatalla(heroe, villano);
-            Batalla(heroe, villano, inventario);
-            finalSegundaBatalla(heroe, villano);
-            Batalla(heroe, villano, inventario);
-            int OpcionFinal = finalTercerBatalla(heroe);
-            int puntos = heroe.getPts();
-            RankingAniadir(user, puntos); 
-            MenuFinal(OpcionFinal);
+            while(!HeroeMUerto(heroe))
+            {
+                Batalla(heroe, villano, inventario);
+                finalPrimeraBatalla(heroe, villano);
+                Batalla(heroe, villano, inventario);
+                finalSegundaBatalla(heroe, villano);
+                Batalla(heroe, villano, inventario);
+                int OpcionFinal = finalTercerBatalla(heroe);
+                int puntos = heroe.getPts();
+                RankingAniadir(user, puntos); 
+                MenuFinal(OpcionFinal);
+            }
+            Menu();
         }while(jugar); 
     }
 }
