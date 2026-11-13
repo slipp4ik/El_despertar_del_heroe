@@ -1,20 +1,31 @@
-u{
+h1{
     font-size: 25px;
     text-underline-position: auto;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: rgba(135, 0, 176, 0.792);
-    
+    color: rgba(0, 0, 0, 0.792);
+    margin-bottom: 40px;
+    text-decoration: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.792);
+    text-decoration-thickness: 2px;
 }
 caption {
     white-space: nowrap;
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 10px;
 }
-
+.accent-letters {
+    color: rgba(255, 0, 0, 0.792); 
+}
 table {
     border-collapse: 
     collapse;
+   
 }
 th,td{
-    border: 2px solid blueviolet;
+    border: 3px solid rgb(0, 0, 0);
+    background-color: rgba(0, 255, 213, 0.792);
     padding: 12px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;

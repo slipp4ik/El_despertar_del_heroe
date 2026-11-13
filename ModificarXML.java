@@ -26,12 +26,9 @@ public class ModificarXML
             DocumentBuilder constructor = fabrica.newDocumentBuilder();
             org.w3c.dom.Document documento = constructor.parse(archivo);
 
-            // Buscar todos los jugadores existentes
             NodeList lista = documento.getElementsByTagName("jugador");
 
             int nuevoID = 1;
-
-            // Calcular el siguiente ID disponible
             for(int i = 0; i < lista.getLength(); i++)
             {
                 Element jugadorExistente = (Element) lista.item(i);
@@ -44,25 +41,20 @@ public class ModificarXML
                 }
             }
 
-            // Crear un nuevo jugador
             Element jugador = documento.createElement("jugador");
             jugador.setAttribute("id", String.valueOf(nuevoID));
 
-            // Crear el usuario
             Element usuario = documento.createElement("usuario");
             usuario.setTextContent(nombre);
             jugador.appendChild(usuario);
 
-            // Crear los puntos
             Element puntosXML = documento.createElement("puntos");
             puntosXML.setTextContent(String.valueOf(puntos));
             jugador.appendChild(puntosXML);
 
-            // Añadir el jugador al ranking
             Element ranking = documento.getDocumentElement();
             ranking.appendChild(jugador);
 
-            // Guardar los cambios en el XML
             TransformerFactory transformerFabrica = TransformerFactory.newInstance();
             Transformer transformer = transformerFabrica.newTransformer();
 
