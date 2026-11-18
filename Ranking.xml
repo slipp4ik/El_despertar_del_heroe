@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE ranking SYSTEM "Ranking.dtd">
+<ranking>    
+
+    <jugador id="1">
+        <usuario>Albert</usuario>
+        <puntos>300</puntos>
+    </jugador>
+
+    
+    <jugador id="2">                                        
+        <usuario>Dani22</usuario>
+        <puntos>349</puntos>
+    </jugador>
+
+    
+    <jugador id="3">  
+        <usuario>Fabio</usuario>
+        <puntos>369</puntos>
+    </jugador>
+
+    
+    <jugador id="4">  
+        <usuario>Alfonso01</usuario> 
+        <puntos>400</puntos>
+    </jugador>
+
+    
+    <jugador id="5">
+        <usuario>Admin1000</usuario> 
+        <puntos>300</puntos>
+    </jugador>
+
+    
+    <jugador id="6">           
+        <usuario>Vippy</usuario>           
+        <puntos>100</puntos>            
+    </jugador>
+
+    
+    <jugador id="7">
+        <usuario>dead</usuario>
+        <puntos>0</puntos>
+    </jugador>
+
+</ranking>

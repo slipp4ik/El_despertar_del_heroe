@@ -6,8 +6,7 @@ public class Despertar_heroe
     public static final String RESET = "\u001B[0m";
     public static final String GREEN = "\u001B[32m";
     public static final String ORANGE = "\u001B[38;5;166m";
-    //alternativa para utilizar timeout sin throws InterruptedException
-    //hecho con ayuda de IA
+
     public static void TimeOut(int milliseconds)  
     {
     try
@@ -20,12 +19,12 @@ public class Despertar_heroe
         }
     }
     
-    public static void Filler()//un separador para estetica visual
+    public static void Filler()
     {
         System.out.println("____________________________________________");
     }
 
-    public static void Intro()//introduccion + hay que guardar el usuario 
+    public static void Intro()
     {
     
         Filler();
@@ -33,7 +32,7 @@ public class Despertar_heroe
        
     }
 
-    public static void Menu() //un menu-> nueva partida, consultar ranking, ayuda, salir
+    public static void Menu()
     {   
         
         TimeOut(500);
@@ -41,7 +40,7 @@ public class Despertar_heroe
         Filler(); 
     }
 
-    public static boolean intCheck(Scanner sc)  //comprobador basico de si he introducido un int
+    public static boolean intCheck(Scanner sc)
     {
         if(!sc.hasNextInt())
         {
@@ -53,7 +52,7 @@ public class Despertar_heroe
         return true;
     }
     
-    public static int MenuCheck(Scanner sc) //utilizando mi comprobador repetir hasta int intoducido 
+    public static int MenuCheck(Scanner sc)
     {
         int opcion = 0;
         boolean repeat = true;
@@ -72,7 +71,7 @@ public class Despertar_heroe
         return opcion;
     }
 
-    public static int intLimitCheck(Scanner sc, int x) // el int x es el limite que quieres tener
+    public static int intLimitCheck(Scanner sc, int x) 
     {
         int opcion;
         do
@@ -88,7 +87,7 @@ public class Despertar_heroe
         return opcion;  
     }
 
-    public static String NuevaPartida()//opcion nueva partida del menu
+    public static String NuevaPartida()
     {   
         Scanner sc = new Scanner(System.in);
 
@@ -112,12 +111,12 @@ public class Despertar_heroe
         return usuario;
     }
 
-    public static void ConsultarRanking()//opcion consultar ranking del menu
+    public static void ConsultarRanking()
     {
         LeerRankingXML.RankingLector();
     }
 
-    public static void Ayuda()//opcion ayuda del menu
+    public static void Ayuda()
     {
         Scanner sc = new Scanner(System.in);
         System.out.println("\nLas reglas del juego son: \n"
@@ -145,12 +144,12 @@ public class Despertar_heroe
         }while(volver !=1); 
     }
 
-    public static void Salir()//opcion salir del menu
+    public static void Salir()
     {
         System.out.println("Hasta luego...");
         System.exit(0);
     }
-    public static String OpcionMenu()//1.nueva partida, 2.consultar ranking, 3.ayuda, 4.salir
+    public static String OpcionMenu()
     {
         Scanner sc = new Scanner(System.in);
         while(true)
@@ -174,7 +173,7 @@ public class Despertar_heroe
         }        
     }
 
-    public static String CrearHeroe() // nombrar el heroe como el jugador quiere
+    public static String CrearHeroe()
     {
         Scanner sc = new Scanner(System.in);
         System.out.println("\nIntroduce el nombre de tu heroe");
@@ -189,21 +188,20 @@ public class Despertar_heroe
         TimeOut(200);
         return HeroeNom;
     }
-    public static int DamageHeroe() // crear el daño para el heroe, usando random
+    public static int DamageHeroe()
     {
         Random random = new Random();
         int damageHeroe = random.nextInt(10,20);
         return damageHeroe;
     }
-    public static int DamageVillano() // crear el daño para el villano, usando random
+    public static int DamageVillano()
     {
         Random random = new Random();
         int damageVillano = random.nextInt(5,15);
         return damageVillano;
     }
 
-    //Abajo viene la historia/contexto del juego
-    public static void HistoriaIntro(Heroe heroe) // la prehistoria 
+    public static void HistoriaIntro(Heroe heroe)
     {   
         TimeOut(200);
         System.out.println(
@@ -213,7 +211,7 @@ public class Despertar_heroe
         System.out.println(heroe.getNombre()+ " aceptó la espada y salió de la cabaña rumbo a las montañas del norte, donde se alzaba la fortaleza del villano.\n"+ 
         "Pero el camino no sería fácil: antes tendría que cruzar tierras malditas y enfrentarse a los siervos que guardaban \ncada paso hacia su destino.\n");
     }
-    public static void villanoIntro(Heroe heroe, Villano villano) // intro del primer villano
+    public static void villanoIntro(Heroe heroe, Villano villano)
     {
         primerVillano(villano);
         TimeOut(1000);
@@ -221,7 +219,7 @@ public class Despertar_heroe
         + " Grimdal el Encadenado emerge de las sombras, bloqueándole el paso con los ojos ardiendo de rabia: \nNadie cruza estas tierras sin pasar sobre mi cadáver.");
         TimeOut(1000);
     }
-    public static void finalPrimeraBatalla(Heroe heroe, Villano villano) // al ganar la primera batalla
+    public static void finalPrimeraBatalla(Heroe heroe, Villano villano)
     {
         segundoVillano(villano);
         Filler();
@@ -265,9 +263,8 @@ public class Despertar_heroe
         int finalopcion = sc.nextInt();
         return finalopcion;
     }
-    //-------------------------------------------------
     
-    public static void heroeAtacar(Heroe heroe, Villano villano) // metodo que realiza el ataque del heroe
+    public static void heroeAtacar(Heroe heroe, Villano villano)
     {    
         if(heroe.serVivo() && villano.serVivo())
         {
@@ -278,7 +275,7 @@ public class Despertar_heroe
         }
     }
 
-    public static void VillanoAtacar(Heroe heroe, Villano villano) // metodo que realiza el ataque del villano
+    public static void VillanoAtacar(Heroe heroe, Villano villano)
     {
         if(heroe.serVivo() && villano.serVivo())
         {
@@ -289,7 +286,7 @@ public class Despertar_heroe
         }
     }
 
-    //opcion del menu de defender el ataque del villano---------
+
     public static boolean defender(Villano villano) 
     {
         Random random = new Random();
@@ -297,7 +294,7 @@ public class Despertar_heroe
         switch(nivelVillano)
         {
         case 1: 
-            int defend1 = random.nextInt(0,2);  // posibilidad 50% de defender el ataque del villano
+            int defend1 = random.nextInt(0,2);  
             if(defend1 == 0)
             {
                 return false;
@@ -307,7 +304,7 @@ public class Despertar_heroe
                 return true;
             }
         case 2:
-            int defend2 = random.nextInt(0,3);  // posibilidad 33.3% de defender el ataque del villano
+            int defend2 = random.nextInt(0,3);  
             if(defend2 == 0 || defend2 == 1)
             {
                 return false;
@@ -317,7 +314,7 @@ public class Despertar_heroe
                 return true;
             }
         case 3:
-            int defend3 = random.nextInt(0,4);  // posibilidad 25% de defender el ataque del villano
+            int defend3 = random.nextInt(0,4);  
             if(defend3 == 0 || defend3 == 1 || defend3 == 2)
             {
                 return false;
@@ -331,7 +328,6 @@ public class Despertar_heroe
         }
     }
 
-    //regenerar HP con una pocion, opcion del menu---------
     public static void UsarPocion(Heroe heroe)
     {
         int HPactual = heroe.getHP();
@@ -343,8 +339,7 @@ public class Despertar_heroe
         }
         heroe.setHP(HPactual);
     }
-
-    //menus durante la batalla----------------------
+  
     public static void menuSinPosibilidadAtacar()
     {
         System.out.println("\n1. Defender \n"+"2. Usar un poción\n"+"3. Inventario\n"+"4. Abandonar");
@@ -353,8 +348,7 @@ public class Despertar_heroe
     {
         System.out.println("\n1. Atacar \n"+"2. Usar un poción\n"+"3. Inventario\n"+"4. Abandonar");
     }
-   
-    //puntos para el ranking --------------------
+  
     public static void AniadirPuntos(Heroe heroe)
     {
        int PtsActual = heroe.getPts();
@@ -370,7 +364,7 @@ public class Despertar_heroe
         heroe.setPts(PtsActual);
     }
     
-    public static void Batalla(Heroe heroe, Villano villano, String[]inventario) // el metodo de batalla principal
+    public static void Batalla(Heroe heroe, Villano villano, String[]inventario) 
     {
         Scanner sc = new Scanner(System.in);
         boolean turnoAt;
@@ -495,7 +489,6 @@ public class Despertar_heroe
         }while(heroe.serVivo() && villano.serVivo());    
     }
 
-    // Creacion de tres villanos
     public static void primerVillano(Villano villano)
     {
         villano.setNombre("Grimdal el Encadenado");
@@ -516,7 +509,6 @@ public class Despertar_heroe
         villano.setHP(80);
         villano.setNivel(3);  
     }
- //-----------------------------------
 
     public static String[] inventario()
     {
@@ -542,7 +534,7 @@ public class Despertar_heroe
     {
         ModificarXML.guardarJugador(nombre, puntos);
     }
-//("Introduce:\n"+"1. Ver ranking\n"+"2. Volver al menu principal\n"+"3. Salir del juego");
+
     public static void MenuFinal(int OpcionFinal)
     {
         switch (OpcionFinal) 
@@ -589,8 +581,8 @@ public class Despertar_heroe
         {
             String user = OpcionMenu();
             String HeroeNom = CrearHeroe();
-            Heroe heroe = new Heroe(HeroeNom, 10,1,0,0,3);
-            Villano villano = new Villano("", 0, 0,0 );
+            Heroe heroe = new Heroe(HeroeNom, 100,1,0,0,3);
+            Villano villano = new Villano(null, 0, 0,0 );
             String[] inventario = inventario();
             HistoriaIntro(heroe);
             villanoIntro(heroe, villano);

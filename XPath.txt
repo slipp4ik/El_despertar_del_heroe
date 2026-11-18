@@ -1,0 +1,21 @@
+1. ¿Qué son los usuarios de todos los jugadores presentes en el ranking? 
+//jugador/usuario
+Resultado: Albert, Dani22, Fabio, Alfonso01, Admin1000, Vippy, dead
+
+2. ¿Qué jugador tiene más de 300 puntos? 
+/ranking/jugador[puntos>300] 
+Resultado: Dani22, Fabio, Alfonso01
+
+3. ¿Qué jugador tiene exactamente 200 puntos? 
+//jugador[puntos=200]
+Resultado: Ninguno
+
+4. ¿Qué es el Id del jugador con exactamente 300 puntos? 
+//jugador[puntos=300]/@id
+Resultado: Albert, Admin1000
+
+5. ¿Qué usuario tiene el Id 1? 
+//juagdor[@id='3']/usuario
+Resultado: Albert
+
+
