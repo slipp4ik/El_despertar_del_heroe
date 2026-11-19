@@ -1,4 +1,5 @@
-public class Heroe extends Characters
+package src;
+public class Heroe extends Personajes
 {
     private int Pts; //puntos
     private int Pocion; 
@@ -32,5 +33,4 @@ public class Heroe extends Characters
                 "\nNivel actual: "+getNivel() +" con "+getPts()+" de 100 puntos maximos"+"\nCantidad de vida: "+getHP()+"\nDaño por ataque es de 10 a 20"+
                 "\nCantidad de pociones disponibles: "+getPocion());
     }
-    
 }

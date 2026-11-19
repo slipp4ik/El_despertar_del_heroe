@@ -1,11 +1,12 @@
-public class Characters 
+package src;
+public class Personajes 
 {
     private String Nombre;
     private int HP; // cantidad de vida
     private int Nivel;
     private int Damage; //el daño 
 
-    public Characters(String Nombre, int HP, int Nivel, int Damage)
+    public Personajes(String Nombre, int HP, int Nivel, int Damage)
     {
         this.Nombre = Nombre;
         this.HP = HP;
@@ -43,6 +44,20 @@ public class Characters
 
     public void setDamage(int damage) {
         Damage = damage;
+    }
+
+    public void serAtacado(int Damage)
+    {
+        HP -= Damage;
+        if(HP < 0)
+        {
+            HP = 0;
+        }
+    }
+
+    public boolean serVivo()
+    {
+        return HP > 0;
     }
 
 }
