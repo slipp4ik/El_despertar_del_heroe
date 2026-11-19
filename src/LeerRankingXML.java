@@ -1,3 +1,4 @@
+package src;
 
 import java.io.File;
 
@@ -16,7 +17,12 @@ public class LeerRankingXML
             File archivo = new File("Ranking.xml");
 
             DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
-            fabrica.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            fabrica.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
+            fabrica.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            fabrica.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            fabrica.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            fabrica.setXIncludeAware(false);
+            fabrica.setExpandEntityReferences(false);
 
             DocumentBuilder constructor = fabrica.newDocumentBuilder();
             org.w3c.dom.Document documento = constructor.parse(archivo);

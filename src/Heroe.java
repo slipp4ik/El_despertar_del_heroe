@@ -1,3 +1,4 @@
+package src;
 public class Heroe extends Personajes
 {
     private int Pts; //puntos

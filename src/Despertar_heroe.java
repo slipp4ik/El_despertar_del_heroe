@@ -1,3 +1,4 @@
+package src;
 import java.util.Random;
 import java.util.Scanner;
 public class Despertar_heroe 
@@ -369,9 +370,9 @@ public class Despertar_heroe
         Scanner sc = new Scanner(System.in);
         boolean turnoAt;
         boolean turnoDef;
-        int limitPocion = 3;
         turnoAt = true;
         turnoDef = false;
+        int limitPocion = 3;
         Filler();
         Filler();
         System.out.println("\nLa batalla contra "+villano.getNombre()+" comienza."+"\nLa estadistica de tu oponente es:");
